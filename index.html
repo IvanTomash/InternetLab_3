@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>InternetLab_3</title>
+        <style>
+            body>div
+            {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            div>div
+            {
+                justify-content: center;
+                justify-items: center;
+                align-items: center;
+                align-content: center;
+                width: 15%;
+                background-color: antiquewhite;
+                border-style: solid;
+                border: 2%;
+                margin: 2%;
+                min-width: 180px;
+            }
+            div>label, div>h2, div>input
+            {
+                display: block;
+            }
+        </style>
+        <script>
+            const today = new Date().toISOString().split('T')[0];
+            document.addEventListener("DOMContentLoaded", function(){
+                let datesInput = document.getElementsByClassName("dateOfStart");                
+                for(let i = 0; i < datesInput.length; i++){
+                    datesInput[i].setAttribute("max", today);
+                }
+            });            
+
+            function CalculateAverageExperience(){
+                let datesInput = document.getElementsByClassName("dateOfStart");
+                let sum = 0;
+                for(let i = 0; i < datesInput.length; i++){
+                     sum += new Date(today).getTime() - new Date(datesInput[i].value).getTime();
+                }
+                let average = sum / datesInput.length;
+                let outputResult = document.getElementById("output");
+                outputResult.textContent = "Середній стаж роботи: " + Math.round(convertMillisecToYears(average)) + " років";
+            }
+
+            function convertMillisecToYears(milliseconds){
+                const millisecPerYear = 1000 * 60 * 60 * 24 * 365;
+                let years = milliseconds /millisecPerYear;
+                return years;
+            }
+        </script>
+    </head>
+    <body>
+        <h1 style ="display: block; text-align: center; background-color:rgb(194, 179, 120);">Розрахунок середнього стажу роботи працівників на поточний час</h1>
+        <div>        
+            <div>
+                <h2>Перший робітник</h2>
+                <label for="employeeName1">Iм'я</label>
+                <input id="employeeName1" type="text">
+                <label for="employeeDate1">Дата прийому на роботу</label>
+                <input id="employeeDate1" class="dateOfStart" type="date">
+            </div>      
+            <div>
+                <h2>Другий робітник</h2>
+                <label for="employeeName2">Iм'я</label>
+                <input id="employeeName2" type="text">
+                <label for="employeeDate2">Дата прийому на роботу</label>
+                <input id="employeeDate2" class="dateOfStart" type="date">
+            </div> 
+            <div>
+                <h2>Третій робітник</h2>
+                <label for="employeeName3">Iм'я</label>
+                <input id="employeeName3" type="text">
+                <label for="employeeDate3">Дата прийому на роботу</label>
+                <input id="employeeDate3" class="dateOfStart" type="date">
+            </div> 
+            <div>
+                <h2>Четвертий робітник</h2>
+                <label for="employeeName4">Iм'я</label>
+                <input id="employeeName4" type="text">
+                <label for="employeeDate4">Дата прийому на роботу</label>
+                <input id="employeeDate4" class="dateOfStart" type="date">
+            </div> 
+            <div>
+                <h2>П'ятий робітник</h2>
+                <label for="employeeName5">Iм'я</label>
+                <input id="employeeName5" type="text">
+                <label for="employeeDate5">Дата прийому на роботу</label>
+                <input id="employeeDate5" class="dateOfStart" type="date">
+            </div>
+        </div> 
+        <button type="button" onclick="CalculateAverageExperience()">Розрахувати середній стаж</button>
+        <p id = "output"></p>
+    </body>
+</html>
